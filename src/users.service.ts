@@ -30,7 +30,8 @@ export class UsersServices {
     return novosUsuarios.length;
   }
 
-  // Daria para fazer todas as funcionalidades abaixo e salva-las em um banco de dados em cache como Redis,
+  // Daria para fazer todas as funcionalidades abaixo via mensagens assíncronas utilizando arquitetura de fila ou job
+  // e salva-las em um banco de dados em cache como Redis,
   // mas como o MongoDB já está rápido, não achei necessário fazê-lo.
 
   async getSuperUsers(): Promise<Usuarios[]> {
