@@ -1,83 +1,99 @@
-# Desafio Técnico: Performance e Análise de Dados via API
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-## Objetivo
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-Você tem 1 hora para criar uma API que recebe um arquivo JSON com 100.000 usuários e oferece endpoints performáticos e bem estruturados para análise dos dados.
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-- [Exemplos de respostas esperadas na API](https://github.com/codecon-dev/desafio-1-1s-vs-3j/blob/main/exemplos-endpoints.json)
-- [Arquivo com 100 mil usuários para importar](https://drive.google.com/file/d/1zOweCB2jidgHwirp_8oBnFyDgJKkWdDA/view?usp=sharing)
-- [Arquivo com 1 mil usuário para teste](https://drive.google.com/file/d/1BX03cWxkvB_MbZN8_vtTJBDGiCufyO92/view?usp=sharing)
+## Description
 
----
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## JSON de entrada
+## Project setup
 
-O JSON contém uma lista de usuários com a seguinte estrutura:
-
-```json
-{
-  "id": "uuid",
-  "name": "string",
-  "age": "int",
-  "score": "int",
-  "active": "bool",
-  "country": "string",
-  "team": {
-    "name": "string",
-    "leader": "bool",
-    "projects": [{ "name": "string", "completed": "bool" }]
-  },
-  "logs": [{ "date": "YYYY-MM-DD", "action": "login/logout" }]
-}
+```bash
+$ npm install
 ```
 
----
+## Compile and run the project
 
-## Endpoints obrigatórios
+```bash
+# development
+$ npm run start
 
-### `POST /users`
+# watch mode
+$ npm run start:dev
 
-Recebe e armazena os usuários na memória. Pode simular um banco de dados em memória.
+# production mode
+$ npm run start:prod
+```
 
-### `GET /superusers`
+## Run tests
 
-- Filtro: `score >= 900` e `active = true`
-- Retorna os dados e o tempo de processamento da requisição.
+```bash
+# unit tests
+$ npm run test
 
-### `GET /top-countries`
+# e2e tests
+$ npm run test:e2e
 
-- Agrupa os superusuários por país.
-- Retorna os 5 países com maior número de superusuários.
+# test coverage
+$ npm run test:cov
+```
 
-### `GET /team-insights`
+## Deployment
 
-- Agrupa por `team.name`.
-- Retorna: total de membros, líderes, projetos concluídos e % de membros ativos.
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-### `GET /active-users-per-day`
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-- Conta quantos logins aconteceram por data.
-- Query param opcional: `?min=3000` para filtrar dias com pelo menos 3.000 logins.
+```bash
+$ npm install -g mau
+$ mau deploy
+```
 
-### `GET /evaluation`
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-Ele deve executar uma autoavaliação dos principais endpoints da API e retornar um relatório de pontuação.
+## Resources
 
-A avaliação deve testar:
+Check out a few resources that may come in handy when working with NestJS:
 
-- Se o status retornado é 200
-- O tempo em milisegundos de resposta
-- Se o retorno é um JSON válido
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-Esse endpoint pode rodar scripts de teste embutidos no próprio projeto e retornar um JSON com os resultados. Ele será utilizado para validar a entrega de forma automática e rápida.
+## Support
 
----
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Requisitos Técnicos
+## Stay in touch
 
-- Tempo de resposta < 1s por endpoint.
-- Todos os endpoints precisam retornar o tempo de processamento (em milissegundos) e a timestamp da requisição
-- Código limpo, modular, com funções bem definidas.
-- Pode usar qualquer linguagem/framework.
-- Documentação ou explicação final vale pontos bônus.
-- Não pode usar IA.
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
